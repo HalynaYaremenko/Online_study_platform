@@ -251,8 +251,8 @@ SELECT s.full_name,
 -- 2. Порахувати відсоток завершених уроків для кожного курсу.
 
 SELECT c.course_name,
-       ROUND((SUM(CASE WHEN p.completed = 'TRUE' THEN 1 ELSE 0 END)
-             / COUNT(*)) * 100,2)  AS completed_percent
+       100 * (SUM(CASE WHEN p.completed = 'TRUE' THEN 1 ELSE 0 END))
+             / COUNT(*) AS completed_percent
   FROM progress p
   JOIN enrollments e ON p.enrollment_id = e.enrollment_id
   JOIN courses c ON c.course_id = e.course_id
@@ -260,12 +260,40 @@ GROUP BY c.course_name
 
 -- 3. Знайти студентів, які завершили всі уроки у своїх курсах.
 
+SELECT s.full_name,
+       CASE WHEN p.completed = 'TRUE' THEN 1 ELSE 0 END AS all_completed
+  FROM progress p
+  JOIN enrollments e ON p.enrollment_id = e.enrollment_id
+  JOIN students s ON s.student_id = e.student_id
+ GROUP BY s.full_name, p.completed
+HAVING MIN(CASE WHEN p.completed THEN 1 ELSE 0 END) = 1;
+
 -- Задача 5. Віконні функції --
 
 -- 1. Для кожного курсу визначити рейтинг студентів за середнім балом.
 
+SELECT c.course_name,
+       s.full_name,
+       ROUND(AVG(p.score),2) AS avg_score,
+       RANK() OVER (
+                    PARTITION BY c.course_name
+                    ORDER BY AVG(p.score) DESC
+                  ) AS student_rank
+  FROM progress p
+  JOIN enrollments e ON p.enrollment_id = e.enrollment_id
+  JOIN courses c ON c.course_id = e.course_id
+  JOIN students s ON s.student_id = e.student_id
+  GROUP BY c.course_name, s.full_name;
 
 -- 2. Порахувати кумулятивну кількість уроків, завершених студентом у хронологічному порядку.
-
+SELECT s.full_name,
+       --p.lesson_number,
+       --e.course_id,
+       SUM(CASE WHEN p.completed THEN 1 ELSE 0  END) 
+           OVER (PARTITION BY s.student_id ORDER BY p.lesson_number)
+FROM students s
+INNER JOIN enrollments e ON s.student_id = e.student_id
+INNER JOIN progress p ON e.enrollment_id = p.enrollment_id
+GROUP BY s.full_name
 
 -- 3. Для кожної категорії курсів знайти топ‑1 курс за кількістю студентів.
