@@ -286,14 +286,26 @@ SELECT c.course_name,
   GROUP BY c.course_name, s.full_name;
 
 -- 2. Порахувати кумулятивну кількість уроків, завершених студентом у хронологічному порядку.
-SELECT s.full_name,
-       --p.lesson_number,
-       --e.course_id,
-       SUM(CASE WHEN p.completed THEN 1 ELSE 0  END) 
-           OVER (PARTITION BY s.student_id ORDER BY p.lesson_number)
+
+SELECT 
+    s.full_name,                    
+    e.enroll_date,
+    
+    -- Додаємо віконну функцію для кумулятивного підрахунку
+    SUM(
+        CASE 
+            WHEN p.completed THEN 1          -- Якщо урок завершено, додаємо 1
+            ELSE 0                           -- Якщо не завершено, додаємо 0
+        END
+    ) OVER (
+        PARTITION BY s.student_id           -- Окремо для кожного студента
+        ORDER BY e.enroll_date, p.lesson_number  -- У хронологічному порядку
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW  -- Від початку до поточного рядка
+    ) AS cumulative_lessons_completed        
+
 FROM students s
 INNER JOIN enrollments e ON s.student_id = e.student_id
 INNER JOIN progress p ON e.enrollment_id = p.enrollment_id
-GROUP BY s.full_name
+ORDER BY s.student_id, e.enroll_date, p.lesson_number;
 
 -- 3. Для кожної категорії курсів знайти топ‑1 курс за кількістю студентів.
