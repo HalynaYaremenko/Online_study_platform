@@ -2,64 +2,64 @@
 
 Вивести всіх студентів, які зареєструвалися після 2024‑01‑01.
 
-![alt text](<Screenshot 2025-12-17 at 14.44.57.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 14.44.57.png>)
 
 Вивести всі курси категорії "Data Science".
 
-![alt text](<Screenshot 2025-12-17 at 14.46.26.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 14.46.26.png>)
 
 # Задача 2. Групування та агрегація
 
 Порахувати кількість студентів у кожному місті.
 
-![alt text](<Screenshot 2025-12-17 at 14.52.29.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 14.52.29.png>)
 
 Порахувати кількість курсів у кожній категорії.
 
-![alt text](<Screenshot 2025-12-17 at 15.53.58.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 15.53.58.png>)
 
 Порахувати середню оцінку по кожному курсу.
 
-![alt text](<Screenshot 2025-12-17 at 21.10.12.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 21.10.12.png>)
 
 # Задача 3. JOIN‑аналіз
 
 Вивести список курсів разом з іменами викладачів.
 
-![alt text](<Screenshot 2025-12-17 at 21.17.09.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 21.17.09.png>)
 
 Вивести студентів та назви курсів, на які вони записані.
 
-![alt text](<Screenshot 2025-12-17 at 21.38.59.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 21.38.59.png>)
 
 Порахувати, скільки студентів у кожного викладача.
 
-![alt text](<Screenshot 2025-12-17 at 21.52.14.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 21.52.14.png>)
 
 # Задача 4. Аналітика прогресу
 
 Порахувати середню оцінку кожного студента.
 
-![alt text](<Screenshot 2025-12-17 at 22.01.53.png>)
+![alt text](<Screens/Screenshot 2025-12-17 at 22.01.53.png>)
 
 Порахувати відсоток завершених уроків для кожного курсу.
 
-![alt text](<Screenshot 2025-12-18 at 11.33.46.png>)
+![alt text](<Screens/Screenshot 2025-12-18 at 11.33.46.png>)
 
 Знайти студентів, які завершили всі уроки у своїх курсах.
 
-![alt text](<Screenshot 2025-12-18 at 11.43.17.png>)
+![alt text](<Screens/Screenshot 2025-12-18 at 11.43.17.png>)
 
 # Задача 5. Віконні функції
 
 Для кожного курсу визначити рейтинг студентів за середнім балом.
 
-![alt text](<Screenshot 2025-12-18 at 13.18.10.png>)
+![alt text](<Screens/Screenshot 2025-12-18 at 13.18.10.png>)
 
 Порахувати кумулятивну кількість уроків, завершених студентом у хронологічному порядку.
 
-![alt text](<Screenshot 2025-12-19 at 10.07.32.png>)
+![alt text](<Screens/Screenshot 2025-12-19 at 10.07.32.png>)
 
 Для кожної категорії курсів знайти топ‑1 курс за кількістю студентів.
 
-![alt text](<Screenshot 2025-12-19 at 13.26.59.png>)
+![alt text](<Screens/Screenshot 2025-12-19 at 13.26.59.png>)
