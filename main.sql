@@ -309,3 +309,22 @@ INNER JOIN progress p ON e.enrollment_id = p.enrollment_id
 ORDER BY s.student_id, e.enroll_date, p.lesson_number;
 
 -- 3. Для кожної категорії курсів знайти топ‑1 курс за кількістю студентів.
+
+--Для кожної категорії курсів знайти топ‑1 курс за кількістю студентів.
+
+WITH rank_courses AS (
+     SELECT c.category,
+            c.course_name,
+            RANK() OVER (
+                  PARTITION BY c.category
+                  ORDER BY COUNT(DISTINCT e.student_id) DESC
+            ) AS rank_cours
+     FROM courses c
+     INNER JOIN enrollments e ON c.course_id = e.course_id
+     GROUP BY c.category, c.course_name
+)
+
+SELECT category,
+       course_name
+FROM rank_courses
+WHERE rank_cours = 1
